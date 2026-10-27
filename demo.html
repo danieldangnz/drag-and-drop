@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Drag-And-Drop</title>
+	<!--Insert JQUERY Library
+	   Link: https://cdnjs.com/libraries/jqueryui
+	   link: https://cdnjs.com/libraries/jquery
+	   Link: https://jqueryui.com/	
+	-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-bootstrap/0.5pre/assets/css/bootstrap.min.css">
+	
+	<link rel="stylesheet" type="text/css" href="style.css">	
+	
+</head>
+
+<body>
+	<!-- Link: <a href="https://jqueryui.com/demos/">https://jqueryui.com/demos/</a> -->
+	<h2>Drag and Drop</h2>
+
+	<!--Drag Area Box 1: Available Courtesy Phones-->
+	<div class="drag-area">
+	  <div class="drop-area">Available Courtesy Phones</div>
+	  <div class="box">iPhone</div>
+	  <div class="box">Samsung A6+</div>
+	  <div class="box">Galaxy Z</div>
+	  <div class="box">Charger</div>
+	</div>
+
+	<!--Drag Area Box 2: Your Choice-->
+	<div class="drag-area">
+	  <div class="drop-area">Your Selection</div>
+	</div>
+
+	<!--Display the outcome-->
+	<div class="result">-</div>
+	
+	<script>
+		//-------------------------------------		
+		//Use JQuery to manipulate CSS style
+		$('h2').css({
+		  'background-color': 'gray',
+		  'text-align': 'center',
+		  'border': 'solid 2px green',
+		  'padding': '50px',
+		  'color': 'red'
+		});
+
+		//Use JQuery to handle event: hover 
+		$('h2').hover(function(){
+		  $(this).css('background-color', 'green');
+		} , function(){
+		  $(this).css('background-color', 'gray');
+		});	
+
+		//-------------------------------------	
+		//Drag and Drop Feature of JQueryUI library
+		//link:	https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js		
+		$(".box" ).draggable({
+		  scope: 'demoBox',
+		  revertDuration: 100,
+		  start: function( event, ui ) {			
+			$( ".box" ).draggable( "option", "revert", true );//Reset
+			$('.result').html('-');
+		  }
+		});
+
+		//
+		$(".drag-area" ).droppable({
+		   scope: 'demoBox',
+		   drop: function( event, ui ) {
+			 let area = $(this).find(".drop-area").html();
+			 let box = $(ui.draggable).html();     
+			 $( ".box" ).draggable( "option", "revert", false );
+			 
+			 //Display action in text
+			 $('.result').html("[Action] <b>" + box + "</b>" +
+							   " dropped on " + "<b>" + area + "</b>");
+			 
+			 //Re-align item
+			 $(ui.draggable).detach().css({top: 0,left: 0}).appendTo(this);
+		   }
+		})
+		
+		
+	</script>	
+
+</body>
+</html>

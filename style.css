@@ -1,0 +1,33 @@
+.drag-area {
+    width: 450px;
+    height: 450px;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    margin-left: 30px;
+    border: 1px solid black;
+}
+
+.drop-area {
+    position: absolute;
+    margin: 0 auto;
+    color: blue;
+    bottom: 10px;
+    left: 20px;
+}
+
+.box {
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+    background: green;
+    color: #fff;
+    text-align: center;
+    z-index: 2;
+    border:2px solid #512DA8;
+}
+
+.result {
+  display: block;
+  margin-left: 30px;
+}
